@@ -1,0 +1,4 @@
+tasks:
+  - init: cat setup.sh | sh
+image:
+  file: .gitpod.dockerfile
