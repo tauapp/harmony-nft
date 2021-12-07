@@ -1,6 +1,8 @@
 <mat-drawer-container autosize>
     <mat-drawer #drawer mode="over">
-      <p>Auto-resizing sidenav</p>
+      <mat-nav-list>
+
+      </mat-nav-list>
     </mat-drawer>
       
     <mat-toolbar color="primary">
@@ -10,5 +12,5 @@
             <mat-icon>menu</mat-icon>
         </button>
     </mat-toolbar>
+    <router-outlet></router-outlet>
 </mat-drawer-container>
-<router-outlet></router-outlet>
