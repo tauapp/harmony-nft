@@ -1,7 +1,14 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button>
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>Hawk NFT</span>
-</mat-toolbar>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer mode="over">
+      <p>Auto-resizing sidenav</p>
+    </mat-drawer>
+      
+    <mat-toolbar color="primary">
+        <span>Hawk NFT</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </mat-toolbar>
+</mat-drawer-container>
 <router-outlet></router-outlet>
