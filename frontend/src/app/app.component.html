@@ -1,7 +1,9 @@
-<mat-drawer-container autosize>
-    <mat-drawer #drawer mode="over">
+<mat-drawer-container>
+    <mat-drawer #drawer mode="over" [ngStyle]="{'width': windowWidth * 0.2 + 'px'}">
       <mat-nav-list>
-        <a mat-list-item href="www.google.com"> Google </a>
+        <a mat-list-item><mat-icon matListIcon>home</mat-icon> Home </a>
+        <a mat-list-item><mat-icon matListIcon>lock</mat-icon> Login </a>
+        <a mat-list-item><mat-icon matListIcon>paid</mat-icon> Sell </a>
       </mat-nav-list>
     </mat-drawer>
       
