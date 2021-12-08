@@ -11,13 +11,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { LandingComponent } from './pages/landing/landing.component';
+import { NotFoundComponent } from './pages/notfound/notfound.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent
+    LandingComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
