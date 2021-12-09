@@ -12,6 +12,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { LandingComponent } from './pages/landing/landing.component';
 import { NotFoundComponent } from './pages/notfound/notfound.component';
+import { LoginComponent } from './pages/login/login.component';
+import {MatCardModule} from '@angular/material/card'; 
 
 
 
@@ -19,7 +21,8 @@ import { NotFoundComponent } from './pages/notfound/notfound.component';
   declarations: [
     AppComponent,
     LandingComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { NotFoundComponent } from './pages/notfound/notfound.component';
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
