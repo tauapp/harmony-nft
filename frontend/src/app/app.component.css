@@ -2,7 +2,8 @@ mat-drawer-container {
     height: 100%
 }
 mat-drawer {
-    width: 300px
+    width: 20%;
+    min-width: 300px
 }
 
 div.padded {
