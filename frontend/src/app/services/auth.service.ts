@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-interface User {
+export interface User {
+  email: string,
   username: string,
   key: string
 }
@@ -12,7 +13,20 @@ interface User {
 export class AuthService {
 
   //TODO: Make it pull current user from cookies.
-  currentUser = new BehaviorSubject<User | undefined> (undefined)
+  currentUser = new BehaviorSubject<User | null> (null)
 
   constructor() { }
+
+  async loginWithGoogle() {
+    //Dummy user data
+    this.currentUser.next({
+      email: "joseph@marcello.ama",
+      username: "Joseph",
+      key: "12345"
+    })
+  }
+
+  logOut() {
+    this.currentUser.next(null)
+  }
 }

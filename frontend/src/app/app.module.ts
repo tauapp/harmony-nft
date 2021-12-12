@@ -13,7 +13,8 @@ import {MatListModule} from '@angular/material/list';
 import { LandingComponent } from './pages/landing/landing.component';
 import { NotFoundComponent } from './pages/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
-import {MatCardModule} from '@angular/material/card'; 
+import {MatCardModule} from '@angular/material/card';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
 
 
 
@@ -22,7 +23,7 @@ import {MatCardModule} from '@angular/material/card';
     AppComponent,
     LandingComponent,
     NotFoundComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,8 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
