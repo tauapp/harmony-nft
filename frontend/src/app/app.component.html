@@ -32,7 +32,7 @@
           <mat-icon matListIcon>login</mat-icon> Login 
         </a>
 
-        <a *ngIf="currentUser != null" mat-list-item routerLink="/login" (click)="drawer.toggle()">
+        <a *ngIf="currentUser != null" mat-list-item routerLink="/login" (click)="drawer.toggle(); auth.currentUser.next(null)">
           <mat-icon matListIcon>logout</mat-icon> Logout
         </a>
       </mat-nav-list>
