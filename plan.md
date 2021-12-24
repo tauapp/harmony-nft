@@ -48,6 +48,11 @@ Recieve payment credentials and claim the NFT for the user
 ### Payload: TBD
 Puts an NFT up for sale
 
+## CDN Mirror
+### POST /cdn/:id
+### Payload: Auth data
+If an NFT is owned by a user, serve the NFT by ID.
+
 ## Backend Models:
 
 ```ts
@@ -76,6 +81,9 @@ NFT {
     forSale: boolean
 
     price: number?
+
+    //Image link URL
+    location: string
 
     @hasOne(() => User)
     owner: HasOne<typeof User>
