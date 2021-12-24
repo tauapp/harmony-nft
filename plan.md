@@ -24,7 +24,9 @@ If the NFT is for sale, shows the NFT screen. Otherwise, gives a warning.
 ### Path /checkout
 Checkout screen
 
+
 # Backend REST Routes
+
 
 ## Authorization
 ### /auth

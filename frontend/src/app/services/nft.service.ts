@@ -57,4 +57,19 @@ export class NftService {
       return Result.Error("You must be logged in to buy an NFT.")
     }
   }
+
+  //Puts an NFT up for sale
+  putNftForSale(id: number, price: number) {
+    if(this.auth.currentUser != null) {
+      if(this.nfts[id].owner == this.auth.currentUser.value!.id) {
+        this.nfts[id].forSale = true
+        this.nfts[id].price = price
+        return Result.Success
+      } else {
+        return Result.Error("You are not the owner of this NFT.")
+      }
+    } else {
+      return Result.Error("You must be logged in to put an NFT up for sale.")
+    }
+  }
 }
