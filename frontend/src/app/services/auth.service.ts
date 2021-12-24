@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface User {
-  email: string,
+  id: number,
   username: string,
-  key: string
+  customerId: string
+  key: string,
+  nfts: number[]
 }
 
 @Injectable({
@@ -20,9 +22,11 @@ export class AuthService {
   async loginWithGoogle() {
     //Dummy user data
     this.currentUser.next({
-      email: "joseph@marcello.ama",
+      id: 0,
       username: "Joseph",
-      key: "12345"
+      key: "12345",
+      customerId: "cus_000",
+      nfts: []
     })
   }
 
