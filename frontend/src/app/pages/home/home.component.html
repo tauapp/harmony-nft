@@ -1,0 +1,27 @@
+<div class="home-container">
+    <h1>Welcome, {{auth.currentUser.value!.username}}</h1>
+    <ng-container *ngIf="nfts.length > 0">
+        <h2>Your NFTs</h2>
+        <div class="row">
+            <!--For each NFT, display it in a material card-->
+            <ng-container *ngFor="let nft of nfts" class="cards">
+                <mat-card class="nft-card">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <h3><b>{{nft.name}}</b></h3>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <img height="100px" width="100px" src="{{nftService.getNftLocation(nft.id)}}" alt="{{nft.name}}">
+                        <br>
+                        <p>{{nft.description}}</p>
+                        <p *ngIf="nft.forSale" class="forsale">On The Market for ${{nft.price}}</p>
+                        <p *ngIf="!nft.forSale" class="notforsale">Not For Sale</p>
+                    </mat-card-content>
+                </mat-card>
+            </ng-container>
+        </div>
+    </ng-container>
+    <h1>NFTs For Sale</h1>
+    
+</div>

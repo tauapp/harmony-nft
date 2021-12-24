@@ -24,6 +24,8 @@ If the NFT is for sale, shows the NFT screen. Otherwise, gives a warning.
 ### Path /checkout
 Checkout screen
 
+# Don't forget the secret easter egg tradition!
+
 
 # Backend REST Routes
 
@@ -31,6 +33,11 @@ Checkout screen
 ## Authorization
 ### /auth
 Gets a user's google credentials and either registers or verifies them.
+
+## List User NFTs
+## GET /user/nfts
+## Payload: Auth info
+List all the NFTs owned by the user
 
 ## List NFTs
 ### GET /nft/all?page=number

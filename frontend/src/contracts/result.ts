@@ -1,6 +1,6 @@
 import {makeTaggedUnion, none} from "safety-match"
 
 export const Result = makeTaggedUnion({
-    Success: none,
+    Success: (contents: any) => contents,
     Error: (message: string) => message
 })

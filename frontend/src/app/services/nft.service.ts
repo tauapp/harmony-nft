@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Result } from 'src/contracts/result';
 import { AuthService } from './auth.service';
 
+
 export interface Nft {
   id: number,
   name: string
@@ -29,15 +30,21 @@ export class NftService {
       price: 10_000,
       location: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Green_square.svg/1200px-Green_square.svg.png",
       owner: 0
+    },
+    {
+      id: 1,
+      name: "Red Square",
+      description: "A red square symbolizing the indisputable soupiness of cereal.",
+      forSale: false,
+      price: 10_000,
+      location: "https://www.americasfinestlabels.com/includes/work/image_cache/4b4f4b63cc837b5f01ce2d718b0f9be2.thumb.jpg",
+      owner: 0
     }
   ]
 
-  loadNfts(page: number): Nft[] {
-    if (this.nfts.length < 10) {
-      return this.nfts
-    } else {
-      return this.nfts.slice((page - 1) * 10, page * 10)
-    }
+  //Return all nfts which are for sale
+  listNftsForSale() {
+    return this.nfts.filter(nft => nft.forSale)
   }
 
   getNft(id: number) {
@@ -49,7 +56,7 @@ export class NftService {
       if(this.nfts[id].forSale) {
         this.nfts[id].forSale = false
         this.nfts[id].owner = this.auth.currentUser.value!.id
-        return Result.Success
+        return Result.Success(null)
       } else {
         return Result.Error("NFT is not for sale.")
       }
@@ -64,12 +71,31 @@ export class NftService {
       if(this.nfts[id].owner == this.auth.currentUser.value!.id) {
         this.nfts[id].forSale = true
         this.nfts[id].price = price
-        return Result.Success
+        return Result.Success(null)
       } else {
         return Result.Error("You are not the owner of this NFT.")
       }
     } else {
       return Result.Error("You must be logged in to put an NFT up for sale.")
     }
+  }
+
+  //Lists a user's owned NFTS
+  listUserNfts() {
+    if(this.auth.currentUser != null) {
+      let myNfts = this.nfts.filter(nft => nft.owner == this.auth.currentUser.value!.id)
+      if(myNfts.length > 0) {
+        return Result.Success(myNfts)
+      } else {
+        return Result.Error("You do not own any NFTs yet.")
+      }
+    } else {
+      return Result.Error("You must be logged in to list your NFTs.")
+    }
+  }
+
+  //Returns the location of an NFT by id
+  getNftLocation(id: number) {
+    return this.nfts[id].location
   }
 }
