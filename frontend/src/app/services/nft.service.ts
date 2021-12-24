@@ -39,12 +39,21 @@ export class NftService {
       price: 10_000,
       location: "https://www.americasfinestlabels.com/includes/work/image_cache/4b4f4b63cc837b5f01ce2d718b0f9be2.thumb.jpg",
       owner: 0
+    },
+    {
+      id: 2,
+      name: "Rico Astlé",
+      description: "A mysterious man who shows up seemingly every time you click a link your friend sent you.",
+      forSale: true,
+      price: 100,
+      location: "https://variety.com/wp-content/uploads/2021/07/Rick-Astley-Never-Gonna-Give-You-Up.png?w=1024",
+      owner: 1
     }
   ]
 
-  //Return all nfts which are for sale
+  //Return all nfts which are for sale and not owned by the current user
   listNftsForSale() {
-    return this.nfts.filter(nft => nft.forSale)
+    return this.nfts.filter(nft => nft.forSale && nft.owner != this.auth.currentUser.value!.id)
   }
 
   getNft(id: number) {
