@@ -16,7 +16,8 @@ import { LoginComponent } from './pages/login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './pages/home/home.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NftComponent } from './pages/nft/nft.component';
 
 
 
@@ -27,6 +28,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     NotFoundComponent,
     LoginComponent,
     HomeComponent,
+    NftComponent,
   ],
   imports: [
     BrowserModule,
