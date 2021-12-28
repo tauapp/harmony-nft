@@ -52,7 +52,7 @@ export class NftService {
   ]
 
   //Return all nfts which are for sale and not owned by the current user
-  listNftsForSale() {
+  listNftsForSale(/*page: number*/) {
     return this.nfts.filter(nft => nft.forSale && nft.owner != this.auth.currentUser.value!.id)
   }
 
