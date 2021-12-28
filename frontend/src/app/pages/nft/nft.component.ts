@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmSaleComponent } from 'src/app/components/confirm-sale/confirm-sale.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Nft, NftService } from 'src/app/services/nft.service';
 
@@ -14,7 +16,8 @@ export class NftComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public nftService: NftService,
-    public authService: AuthService
+    public authService: AuthService,
+    private dialog: MatDialog
     ) { }
 
   nftId: number = 0
@@ -61,6 +64,19 @@ export class NftComponent implements OnInit {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+    })
+  }
+
+  putUpForSale() {
+    let confirm = this.dialog.open(ConfirmSaleComponent, {
+      height: '500px',
+      width: '500px',
+    })
+
+    confirm.afterClosed().subscribe(result => {
+      if(result != 0) {
+        this.nftService.putNftForSale(this.nftId, result)
+      }
     })
   }
 }

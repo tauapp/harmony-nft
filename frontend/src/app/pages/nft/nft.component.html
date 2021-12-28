@@ -17,14 +17,14 @@
 </div>
 <div class="center">
     <h2 *ngIf="isOwner && nft.forSale">
-        <i>This NFT is currently for Sale for ${{nft.price}}.</i>
+        <i>This NFT is currently on Sale for ${{nft.price}}.</i>
     </h2>
 </div>
 <div id="actions">
     <button mat-raised-button id="buy-button" *ngIf="!isOwner">
         Buy NFT for ${{nft.price}}
     </button>
-    <button mat-raised-button id="sell-button" *ngIf="isOwner && nft.forSale == false">
+    <button mat-raised-button id="sell-button" *ngIf="isOwner && nft.forSale == false" (click)="putUpForSale()">
         Put NFT Up For Sale
     </button>
     <!--If the NFT is owned, a button to download the NFT-->

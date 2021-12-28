@@ -1,0 +1,31 @@
+<div class="modal" *ngIf="confirmMode">
+    <h1>Are you sure you want to put this NFT up for sale?</h1>
+    <h2>Once it's on the market, you can't take it down.</h2>
+    <h3>You can still download the NFT while it is unsold.</h3>
+    <div class="actions">
+        <button mat-raised-button class="sell-button" (click)="putUpForSale()">
+            Put NFT Up For Sale
+        </button>
+
+        <button mat-raised-button class="cancel-button" (click)="cancel()">
+            Cancel
+        </button>
+    </div>
+</div>
+
+<div class="modal" *ngIf="!confirmMode">
+    <h1>Enter the market price of the NFT (USD)</h1>
+    <mat-form-field id="price-input" appearance="fill">
+        <input matInput [(ngModel)]="price" placeholder="Enter the price of the NFT" type="number">
+    </mat-form-field>
+    <div class="actions">
+        <button mat-raised-button class="sell-button" (click)="confirmPrice()" [disabled]="!parseInt(price)">
+            Confirm Price
+        </button>
+
+        <button mat-raised-button class="cancel-button" (click)="cancel()">
+            Cancel
+        </button>
+    </div>
+</div>
+

@@ -1,0 +1,47 @@
+.actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    gap: 30px;
+}
+
+#price-input {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.cancel-button {
+    background-color: #ff3c00;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+}
+
+.sell-button {
+    font-size: 1.2em;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-top: 30px;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    text-align: center;
+}

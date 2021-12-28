@@ -18,6 +18,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './pages/home/home.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NftComponent } from './pages/nft/nft.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmSaleComponent } from './components/confirm-sale/confirm-sale.component'; 
+import {MatInputModule} from '@angular/material/input'; 
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -29,6 +33,7 @@ import { NftComponent } from './pages/nft/nft.component';
     LoginComponent,
     HomeComponent,
     NftComponent,
+    ConfirmSaleComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,10 @@ import { NftComponent } from './pages/nft/nft.component';
     MatListModule,
     MatCardModule,
     FontAwesomeModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
