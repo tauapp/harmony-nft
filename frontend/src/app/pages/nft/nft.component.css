@@ -1,0 +1,68 @@
+#nft-image-container {
+    border-radius: 25px;
+    height: 300px;
+    width: 300px;
+    /* center contents */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* */
+#nft-header-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#nft-title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+/* A green button with white text of medium size */
+#buy-button {
+    background-color: #1c7700;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+    height: 75px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+/* A container for action buttons */
+#actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+}
+
+#sell-button {
+    background-color: #ff3c00;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+    height: 75px;
+    font-size: 20px;
+    border-radius: 10px;
+}

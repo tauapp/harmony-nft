@@ -13,8 +13,8 @@ export class NftComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private nftService: NftService,
-    private authService: AuthService
+    public nftService: NftService,
+    public authService: AuthService
     ) { }
 
   nftId: number = 0
