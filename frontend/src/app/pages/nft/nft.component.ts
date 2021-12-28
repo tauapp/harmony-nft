@@ -46,4 +46,17 @@ export class NftComponent implements OnInit {
     }
   }
 
+  download() {
+    fetch(this.nftService.getNftLocation(this.nftId))
+    .then(res => res.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = this.nft.name + ".jpeg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    })
+  }
 }
