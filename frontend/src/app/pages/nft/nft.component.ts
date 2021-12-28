@@ -47,6 +47,10 @@ export class NftComponent implements OnInit {
   }
 
   download() {
+    //If the user does not own the NFT, then return
+    if(!this.isOwner) {
+      return
+    }
     fetch(this.nftService.getNftLocation(this.nftId))
     .then(res => res.blob())
     .then(blob => {

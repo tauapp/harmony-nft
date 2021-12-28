@@ -2,10 +2,10 @@
 <div id="nft-header-container">
     <!--Shows the NFT image in a material card next to the title and description-->
     <mat-card id="nft-image-container">
-        <ng-container *ngIf="nft.owner == authService.currentUser.value?.id">
+        <ng-container *ngIf="isOwner">
             <img [src]="nftService.getNftLocation(nft.id)" width = "200px"> 
         </ng-container>
-        <ng-container *ngIf="nft.owner != authService.currentUser.value?.id">
+        <ng-container *ngIf="!isOwner">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png" width = "200px">
         </ng-container>
     </mat-card>
@@ -16,19 +16,19 @@
     </div>
 </div>
 <div class="center">
-    <h2 *ngIf="authService.currentUser.value?.id == nft.owner && nft.forSale">
-        <i>This NFT is currently for Sale.</i>
+    <h2 *ngIf="isOwner && nft.forSale">
+        <i>This NFT is currently for Sale for ${{nft.price}}.</i>
     </h2>
 </div>
 <div id="actions">
-    <button mat-raised-button id="buy-button" *ngIf="authService.currentUser.value?.id != nft.owner">
+    <button mat-raised-button id="buy-button" *ngIf="!isOwner">
         Buy NFT for ${{nft.price}}
     </button>
-    <button mat-raised-button id="sell-button" *ngIf="authService.currentUser.value?.id == nft.owner && nft.forSale == false">
+    <button mat-raised-button id="sell-button" *ngIf="isOwner && nft.forSale == false">
         Put NFT Up For Sale
     </button>
     <!--If the NFT is owned, a button to download the NFT-->
-    <button mat-raised-button id="download-button" *ngIf="authService.currentUser.value?.id == nft.owner" (click)="download()">
+    <button mat-raised-button id="download-button" *ngIf="isOwner" (click)="download()">
         Download NFT
     </button>
 </div>
