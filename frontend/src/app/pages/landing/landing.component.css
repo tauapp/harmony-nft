@@ -1,24 +1,8 @@
-.box{
-    height: 100vh;
-    display: flex;
-}
-
-#box-1 {
-    background-color: lavender;
-}
-
-#box-2 {
-    background-color: lightcoral;
-}
-
-mat-card {
-    height: 500px;
-    width: 500px;
-    margin-left: 10%;
-    border-radius: 25px;
-    margin-top: 10vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/*A container with the title, description and an image of the NFT site*/
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
 }
