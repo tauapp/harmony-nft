@@ -16,16 +16,6 @@
           <mat-icon matListIcon>home</mat-icon> Home 
         </a>
 
-        <ng-container *ngIf="currentUser != null">
-          <a mat-list-item (click)="drawer.toggle()">
-            <mat-icon matListIcon>shopping_bag</mat-icon> Buy
-          </a>
-  
-          <a mat-list-item (click)="drawer.toggle()">
-            <mat-icon matListIcon>sell</mat-icon> Sell 
-          </a>
-        </ng-container> 
-
         <mat-divider></mat-divider>
 
         <a *ngIf="currentUser == null" mat-list-item routerLink="/login" (click)="drawer.toggle()">
@@ -42,7 +32,7 @@
         <button mat-icon-button (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span routerLink="/">Hawk NFT</span>
+        <span routerLink="/home">Hawk NFT</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
 </mat-drawer-container>

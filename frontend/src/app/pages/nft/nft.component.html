@@ -21,7 +21,7 @@
     </h2>
 </div>
 <div id="actions">
-    <button mat-raised-button id="buy-button" *ngIf="!isOwner">
+    <button mat-raised-button id="buy-button" *ngIf="!isOwner" (click)="buyNft()">
         Buy NFT for ${{nft.price}}
     </button>
     <button mat-raised-button id="sell-button" *ngIf="isOwner && nft.forSale == false" (click)="putUpForSale()">

@@ -12,8 +12,7 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "home", component: HomeComponent, /*canActivate: [AuthGuard]*/},
   {path: "nft/:id", component: NftComponent},
-  // {path: "sell", component: SellComponent},
-  // {path: "checkout", component: CheckoutComponent}
+  // {path: "link", component: CredLinkComponent}
   {path: "**", component: NotFoundComponent}
 ]
 

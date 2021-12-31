@@ -22,7 +22,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
 }
+
 
 h1 {
     font-size: 2.5em;
@@ -67,6 +71,12 @@ h1 {
     align-items: center;
     margin-top: 30px;
     gap: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    #actions {
+        flex-direction: column;
+    }
 }
 
 #sell-button {

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmBuyComponent } from 'src/app/components/confirm-buy/confirm-buy.component';
 import { ConfirmSaleComponent } from 'src/app/components/confirm-sale/confirm-sale.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Nft, NftService } from 'src/app/services/nft.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-nft',
@@ -17,7 +19,8 @@ export class NftComponent implements OnInit {
     private router: Router,
     public nftService: NftService,
     public authService: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private storage: StorageService
     ) { }
 
   nftId: number = 0
@@ -71,11 +74,33 @@ export class NftComponent implements OnInit {
     let confirm = this.dialog.open(ConfirmSaleComponent, {
       height: '500px',
       width: '500px',
+      autoFocus: false,
+      restoreFocus: false
     })
 
     confirm.afterClosed().subscribe(result => {
       if(result != 0) {
         this.nftService.putNftForSale(this.nftId, result)
+      }
+    })
+  }
+
+  buyNft() {
+    this.storage.nftToBuy = this.nft
+
+
+    let confirm = this.dialog.open(ConfirmBuyComponent, {
+      height: '500px',
+      width: '500px',
+      autoFocus: false,
+      restoreFocus: false
+    })
+
+    confirm.afterClosed().subscribe(result => {
+      if(result) {
+        this.nftService.buyNft(this.nftId)
+        //Return to home page
+        this.router.navigate(['/home'])
       }
     })
   }

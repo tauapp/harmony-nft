@@ -17,8 +17,8 @@ Shows the user the newest NFTs for sale, their owned NFTs, and a search bar
 If the NFT is for sale, shows the NFT screen. Otherwise, gives a warning.
 
 ## Checkout
-### Path /checkout
-Checkout screen
+### Path /link
+Link user payment credentials to account
 
 # Don't forget the secret easter egg tradition!
 

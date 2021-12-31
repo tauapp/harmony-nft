@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmSaleComponent } from './components/confirm-sale/confirm-sale.component'; 
 import {MatInputModule} from '@angular/material/input'; 
 import { FormsModule } from '@angular/forms';
+import { ConfirmBuyComponent } from './components/confirm-buy/confirm-buy.component';
 
 
 
@@ -34,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     NftComponent,
     ConfirmSaleComponent,
+    ConfirmBuyComponent,
   ],
   imports: [
     BrowserModule,

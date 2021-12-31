@@ -1,0 +1,14 @@
+<div class="modal">
+    <h1>Confirm Your Purchase:</h1>
+    <h2>Are you sure you want to purchase <i>{{storage.nftToBuy!.name}}</i> for ${{storage.nftToBuy!.price}}?</h2>
+
+    <div class="actions">
+        <button mat-raised-button class="buy-button" (click)="confirmPurchase()">
+            Confirm Purchase
+        </button>
+
+        <button mat-raised-button class="cancel-button" (click)="cancel()" autofocus>
+            Cancel
+        </button>
+    </div>
+</div>
