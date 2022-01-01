@@ -12,7 +12,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { LandingComponent } from './pages/landing/landing.component';
 import { NotFoundComponent } from './pages/notfound/notfound.component';
-import { LoginComponent } from './pages/login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './pages/home/home.component';
@@ -31,7 +30,6 @@ import { ConfirmBuyComponent } from './components/confirm-buy/confirm-buy.compon
     AppComponent,
     LandingComponent,
     NotFoundComponent,
-    LoginComponent,
     HomeComponent,
     NftComponent,
     ConfirmSaleComponent,

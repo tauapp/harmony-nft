@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 export interface User {
@@ -17,7 +18,7 @@ export class AuthService {
   //TODO: Make it pull current user from cookies.
   currentUser = new BehaviorSubject<User | null> (null)
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   async loginWithGoogle() {
     //Dummy user data
@@ -28,6 +29,9 @@ export class AuthService {
       customerId: "cus_000",
       nfts: []
     })
+
+    //Redirect to home
+    this.router.navigate(['/home'])
   }
 
   logOut() {

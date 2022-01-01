@@ -3,7 +3,7 @@
     <mat-drawer #drawer mode="over">
       <mat-nav-list>
 
-        <ng-container *ngIf="currentUser != null">
+        <ng-container>
           <mat-list-item>
             <mat-icon>person</mat-icon>
             <b>{{currentUser?.username}}</b> 
@@ -18,21 +18,18 @@
 
         <mat-divider></mat-divider>
 
-        <a *ngIf="currentUser == null" mat-list-item routerLink="/login" (click)="drawer.toggle()">
-          <mat-icon matListIcon>login</mat-icon> Login 
-        </a>
 
-        <a *ngIf="currentUser != null" mat-list-item routerLink="/login" (click)="drawer.toggle(); auth.currentUser.next(null)">
+        <a mat-list-item routerLink="/" (click)="drawer.toggle(); auth.currentUser.next(null)">
           <mat-icon matListIcon>logout</mat-icon> Logout
         </a>
       </mat-nav-list>
     </mat-drawer>
       
     <mat-toolbar color="primary">
-        <button mat-icon-button (click)="drawer.toggle()">
+        <button mat-icon-button (click)="drawer.toggle()" *ngIf="currentUser != null">
             <mat-icon>menu</mat-icon>
         </button>
-        <span routerLink="/home">Hawk NFT</span>
+        <span [routerLink]="currentUser ? '/home' : '/'">Hawk NFT</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
 </mat-drawer-container>

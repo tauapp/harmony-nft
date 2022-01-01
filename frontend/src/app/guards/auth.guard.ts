@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
     if (this.auth.currentUser.value != null) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
       return false;
     }
   }
