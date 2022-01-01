@@ -91,7 +91,11 @@ h1 {
 
 @media screen and (min-width: 768px) {
   .onleft {
-    margin-right: 150px;
+    margin-right: 250px;
+  }
+
+  .onright {
+    margin-left: 50px;
   }
 }
 
@@ -99,4 +103,10 @@ h1 {
   height: 350px;
   border-radius: 25px;
   margin-left: -35%;
+}
+
+.nftpic {
+  height: 350px;
+  border-radius: 25px;
+  margin-left: -15%;
 }
