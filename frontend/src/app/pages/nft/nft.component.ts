@@ -71,6 +71,9 @@ export class NftComponent implements OnInit {
   }
 
   putUpForSale() {
+
+    this.storage.nftToSell = this.nft
+
     let confirm = this.dialog.open(ConfirmSaleComponent, {
       height: '500px',
       width: '500px',

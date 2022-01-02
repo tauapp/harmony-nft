@@ -3,8 +3,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 200px;
+    margin-top: 150px;
     gap: 30px;
+}
+
+.fees {
+    height: 40px;
 }
 
 @media screen and (max-width: 768px) {

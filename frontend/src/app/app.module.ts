@@ -22,6 +22,7 @@ import { ConfirmSaleComponent } from './components/confirm-sale/confirm-sale.com
 import {MatInputModule} from '@angular/material/input'; 
 import { FormsModule } from '@angular/forms';
 import { ConfirmBuyComponent } from './components/confirm-buy/confirm-buy.component';
+import {MatTooltipModule} from '@angular/material/tooltip'; 
 
 
 
@@ -49,7 +50,8 @@ import { ConfirmBuyComponent } from './components/confirm-buy/confirm-buy.compon
     MatSnackBarModule,
     MatDialogModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

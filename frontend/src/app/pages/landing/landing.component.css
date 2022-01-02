@@ -8,6 +8,7 @@
   gap: 50px;
 }
 
+
 /*Make intro container flex direction column on mobile*/
 @media screen and (max-width: 768px) {
   .container {

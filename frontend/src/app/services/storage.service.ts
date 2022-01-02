@@ -9,4 +9,6 @@ export class StorageService {
   constructor() { }
 
   nftToBuy?: Nft
+
+  nftToSell?: Nft
 }

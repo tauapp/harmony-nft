@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-confirm-sale',
@@ -8,7 +9,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class ConfirmSaleComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ConfirmSaleComponent>) { }
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmSaleComponent>,
+    public storage: StorageService
+    ) { }
 
   ngOnInit(): void {
   }
@@ -18,8 +22,8 @@ export class ConfirmSaleComponent implements OnInit {
 
   price = ""
 
-  //Inject parseInt into template for validation
-  parseInt = parseInt
+  //Template Injections
+  parseInt = parseInt; parseFloat=parseFloat; Math = Math; Number = Number;
 
   putUpForSale() {
     this.confirmMode = false
