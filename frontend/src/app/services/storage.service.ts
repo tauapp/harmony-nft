@@ -11,4 +11,6 @@ export class StorageService {
   nftToBuy?: Nft
 
   nftToSell?: Nft
+
+  priceToSell?: number
 }

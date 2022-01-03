@@ -16,10 +16,7 @@ export class HomeComponent implements OnInit {
     public nftService: NftService,
     private snackBar: MatSnackBar,
     private router: Router
-  ) { 
-    //For now
-    this.auth.loginWithGoogle()
-  }
+  ) {}
   nfts: Nft[] = []
 
   //When an nft is clicked, it navigates to its page

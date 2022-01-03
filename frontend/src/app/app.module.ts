@@ -25,6 +25,8 @@ import { ConfirmBuyComponent } from './components/confirm-buy/confirm-buy.compon
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {GoogleLoginProvider, SocialLoginModule} from "angularx-social-login";
 import {environment} from "../environments/environment";
+import { CookieService } from 'ngx-cookie-service';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 
 
@@ -37,6 +39,7 @@ import {environment} from "../environments/environment";
     NftComponent,
     ConfirmSaleComponent,
     ConfirmBuyComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +56,24 @@ import {environment} from "../environments/environment";
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    CookieService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true, //keeps the user signed in
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(environment.client_id)
+          }
+        ]
+      }
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

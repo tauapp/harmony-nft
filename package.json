@@ -2,5 +2,7 @@
     "name": "nft",
     "version": "1.0.0",
     "private": true,
-    "dependencies": {}
+    "dependencies": {
+        "ngx-cookie-service": "^13.1.2"
+    }
 }

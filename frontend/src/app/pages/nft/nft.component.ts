@@ -83,8 +83,11 @@ export class NftComponent implements OnInit {
 
     confirm.afterClosed().subscribe(result => {
       if(result != 0) {
+        this.storage.priceToSell = parseFloat(result)
         this.nftService.putNftForSale(this.nftId, result)
       }
+      this.storage.nftToSell = undefined
+      this.storage.priceToSell = undefined
     })
   }
 
@@ -102,9 +105,8 @@ export class NftComponent implements OnInit {
     confirm.afterClosed().subscribe(result => {
       if(result) {
         this.nftService.buyNft(this.nftId)
-        //Return to home page
-        this.router.navigate(['/home'])
       }
+      this.storage.nftToBuy = undefined
     })
   }
 }

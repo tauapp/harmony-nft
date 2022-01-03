@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Result } from 'src/contracts/result';
 import { AuthService } from './auth.service';
 
@@ -18,7 +19,7 @@ export interface Nft {
 })
 export class NftService {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   //REPLACED BY API
   private nfts: Nft[] = [
@@ -29,7 +30,7 @@ export class NftService {
       forSale: true,
       price: 10_000,
       location: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Green_square.svg/1200px-Green_square.svg.png",
-      owner: 0
+      owner: 1
     },
     {
       id: 1,
@@ -61,6 +62,10 @@ export class NftService {
   }
 
   buyNft(id: number) {
+    if(!this.auth.isLinked()) {
+      //Redirect to link page
+      this.router.navigate(['/link'])
+    }
     if(this.auth.currentUser != null) {
       if(this.nfts[id].forSale) {
         this.nfts[id].forSale = false
@@ -76,6 +81,10 @@ export class NftService {
 
   //Puts an NFT up for sale
   putNftForSale(id: number, price: number) {
+    if(!this.auth.isLinked()) {
+      //Redirect to link page
+      this.router.navigate(['/link'])
+    }
     if(this.auth.currentUser != null) {
       if(this.nfts[id].owner == this.auth.currentUser.value!.id) {
         this.nfts[id].forSale = true

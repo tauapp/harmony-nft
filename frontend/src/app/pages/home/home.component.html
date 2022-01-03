@@ -22,7 +22,7 @@
             </ng-container>
         </div>
     </ng-container>
-    <h2>NFTs For Sale</h2>
+    <h2 *ngIf="nftService.listNftsForSale().length">NFTs For Sale</h2>
     <div class="row">
         <!--For each NFT, display it in a material card-->
         <ng-container *ngFor="let nft of nftService.listNftsForSale()" class="cards">

@@ -62,6 +62,10 @@ If an NFT is owned by a user, serve the NFT by ID.
 ### POST /payments/link
 Links a user to a Stripe customer for later use.
 
+## Is Payment Linked
+### GET /payments/islinked
+Returns a boolean: If the user is already linked to a Stripe customer.
+
 ## Backend Models:
 
 ```ts
