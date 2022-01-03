@@ -6,4 +6,5 @@ cd backend
 yarn
 cd ../frontend
 yarn
+sh decrypt.sh
 cd ..
