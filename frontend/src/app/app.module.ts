@@ -23,6 +23,8 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ConfirmBuyComponent } from './components/confirm-buy/confirm-buy.component';
 import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {GoogleLoginProvider, SocialLoginModule} from "angularx-social-login";
+import {environment} from "../environments/environment";
 
 
 

@@ -25,6 +25,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "angularx-social-login": "^4.0.1",
     "rxjs": "~7.4.0",
     "safety-match": "^0.4.4",
     "tslib": "^2.3.0",
