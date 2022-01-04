@@ -1,7 +1,17 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
+import Stripe from 'stripe'
+import Env from '@ioc:Adonis/Core/Env'
 
 export default class UsersController {
+
+    stripe = new Stripe(
+        Env.get('STRIPE_SECRET_KEY'),
+        {
+            apiVersion: '2020-08-27',
+        }
+    )
+
     public async login ({ request, response, auth }: HttpContextContract) {
         const { email, password, name } = request.body()
         if(!email || !password || !name) {
