@@ -1,0 +1,1 @@
+sudo --preserve-env gpg --symmetric -c .env

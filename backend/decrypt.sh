@@ -1,0 +1,1 @@
+sudo --preserve-env gpg --output .env --decrypt .env.gpg
