@@ -11,8 +11,9 @@ export default class Nfts extends BaseSchema {
       table.boolean('for_sale').notNullable()
       table.float('price').notNullable()
       table.string('location',1024).notNullable()
+      table.integer('owner_id').unsigned().notNullable()
       table
-        .foreign('user_id')
+        .foreign('owner_id')
         .references('users.id')
         .onDelete('CASCADE')
 

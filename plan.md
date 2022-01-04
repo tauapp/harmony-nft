@@ -27,7 +27,7 @@ Link user payment credentials to account
 
 
 ## Authorization
-### /auth
+### /auth/login
 Gets a user's google credentials and either registers or verifies them.
 
 ## List User NFTs
@@ -37,7 +37,7 @@ List all the NFTs owned by the user
 
 ## List NFTs
 ### GET /nft/all?page=number
-Gets 10 NFTs by page number
+Gets All NFTs for Sale
 
 ## NFT Details
 ### GET /nft/:id
@@ -59,11 +59,11 @@ Puts an NFT up for sale. Returns true if payment credentials are there, returns 
 If an NFT is owned by a user, serve the NFT by ID.
 
 ## Payment Link
-### POST /payments/link
+### POST /auth/link
 Links a user to a Stripe customer for later use.
 
 ## Is Payment Linked
-### GET /payments/islinked
+### GET /auth/islinked
 Returns a boolean: If the user is already linked to a Stripe customer.
 
 ## Backend Models:
@@ -72,7 +72,9 @@ Returns a boolean: If the user is already linked to a Stripe customer.
 User {
     id: number
 
-    username: string
+    email: string
+
+    name: string
 
     key: string
 

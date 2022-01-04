@@ -9,9 +9,9 @@ import { PaymentComponent } from './pages/payment/payment.component';
 
 const routes: Routes = [
   {path: "", component: LandingComponent},
-  {path: "home", component: HomeComponent, /*canActivate: [AuthGuard]*/},
-  {path: "nft/:id", component: NftComponent},
-  {path: "link", component: PaymentComponent},
+  {path: "home", component: HomeComponent, canActivate: [AuthGuard]},
+  {path: "nft/:id", component: NftComponent, canActivate: [AuthGuard]},
+  {path: "link", component: PaymentComponent, canActivate: [AuthGuard]},
   {path: "**", component: NotFoundComponent}
 ]
 

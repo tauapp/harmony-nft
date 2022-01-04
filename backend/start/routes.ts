@@ -19,7 +19,28 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return { ping: 'pong' }
 })
+
+//Test Health of the server
+Route.get('/health', async ({ response }) => {
+	let report = await HealthCheck.getReport()
+	return report.healthy ? response.ok(report) : response.badRequest(report)
+})
+
+Route.group(() => {
+  Route.post("/login", "UsersController.login")
+  Route.post("/link", "UsersController.link").middleware('auth')
+  Route.post("/islinked", "UsersController.isLinked").middleware('auth')
+  Route.get("/nfts", "UsersController.getNfts").middleware('auth')
+}).prefix('auth')
+
+Route.group(() => {
+  Route.get("/all", "NftsController.getAll")
+  Route.get("/:id", "NftsController.getOne")
+  Route.post("/buy", "NftsController.buy")
+  Route.post("/sell", "NftsController.sell")
+}).prefix('nft').middleware('auth')
