@@ -41,6 +41,13 @@ export default class NftsController {
                 customer: user.customerId,
                 description: `${nft.owner.name} bought ${nft.name}`,
             })
+            //Payout NFT price to owner
+            this.stripe.transfers.create({
+                amount: nft.price * 0.85,
+                currency: 'usd',
+                destination: nft.owner.customerId //TODO: CREATE STRIPE ACCOUNT,
+                description: `${user.name} sold ${nft.name}`,
+            })
             nft.ownerId = user.id
             await nft.save()
             return response.json(nft)

@@ -41,6 +41,7 @@ export default class UsersController {
             email: user.email,
             source: customerId,
         })
+
         user.customerId = stripeCustomer.id
         await user.save()
         return response.json(user)
