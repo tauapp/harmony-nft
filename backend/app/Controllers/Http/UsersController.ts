@@ -42,6 +42,16 @@ export default class UsersController {
             source: customerId,
         })
 
+        //Create a stripe account linked to the customer ID
+        this.stripe.accounts.create({
+            type: 'custom',
+            country: 'US',
+            email: user.email,
+            business_type: 'individual',
+            
+        })
+
+
         user.customerId = stripeCustomer.id
         await user.save()
         return response.json(user)
