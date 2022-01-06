@@ -35,22 +35,26 @@ export default class NftsController {
         if (nft.forSale) {
             nft.forSale = false
             await nft.load('owner')
-            await this.stripe.charges.create({
+            return this.stripe.charges.create({
                 amount: nft.price,
                 currency: 'usd',
                 customer: user.customerId,
                 description: `${nft.owner.name} bought ${nft.name}`,
             })
-            //Payout NFT price to owner
-            await this.stripe.transfers.create({
-                amount: nft.price * 0.85,
-                currency: 'usd',
-                destination: nft.owner.customerId,
-                description: `${user.name} sold ${nft.name}`,
+            .then(() => {
+                return this.stripe.transfers.create({
+                    amount: nft.price * 0.85,
+                    currency: 'usd',
+                    destination: nft.owner.customerId,
+                    description: `${user.name} sold ${nft.name}`,
+                })
             })
-            nft.ownerId = user.id
-            await nft.save()
-            return response.json(nft)
+            .then(() => {
+                nft.ownerId = user.id
+                return nft.save()
+            })
+            .then(() => response.json(nft))
+            .catch(err => response.status(500).json(err))
         } else {
             return response.status(400).json({ error: 'NFT is not for sale' })
         }
