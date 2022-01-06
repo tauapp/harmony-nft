@@ -45,7 +45,7 @@ export default class NftsController {
             this.stripe.transfers.create({
                 amount: nft.price * 0.85,
                 currency: 'usd',
-                destination: nft.owner.customerId //TODO: CREATE STRIPE ACCOUNT,
+                destination: nft.owner.customerId, //TODO: CREATE STRIPE ACCOUNT
                 description: `${user.name} sold ${nft.name}`,
             })
             nft.ownerId = user.id
