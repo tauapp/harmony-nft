@@ -21,6 +21,9 @@ export default class Nft extends BaseModel {
   @column()
   public location: string
 
+  @column()
+  public ownerId: number
+
   @hasOne(() => User)
   public owner: HasOne<typeof User>
 
