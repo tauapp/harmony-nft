@@ -2,6 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Nft from 'App/Models/Nft'
 import Stripe from 'stripe'
 import Env from '@ioc:Adonis/Core/Env'
+import Drive from '@ioc:Adonis/Core/Drive'
 
 export default class NftsController {
 
@@ -53,5 +54,36 @@ export default class NftsController {
         } else {
             return response.status(400).json({ error: 'NFT is not for sale' })
         }
+    }
+
+    //Sell An NFT
+    public async sell({ request, params, response, auth }: HttpContextContract) {
+        const user = auth.user!
+        const nft = await Nft.find(params.id)
+        if (!nft) {
+            return response.status(404).json({ error: 'NFT not found' })
+        }
+        nft.load('owner')
+        if(user.id != nft.ownerId) {
+            response.status(400).json({ error: "You do not own that NFT."})
+        }
+        nft.forSale = true;
+        nft.price = request.input('price')
+        await nft.save()
+        response.status(200).json("Success!")
+    }
+
+    public async cdn({ auth, params, response }: HttpContextContract) {
+        const user = auth.user!
+        const nft = await Nft.find(params.id)
+        if(!nft) {
+            return response.status(404).json({ error: "Nft not found" })
+        }
+        if(nft.ownerId != user.id) {
+            return response.status(400).json({ error: "You do not own that NFT." })
+        }
+        let pic = await Drive.get(nft.id + ".png")
+
+        return pic
     }
 }

@@ -53,7 +53,7 @@ const driveConfig: DriveConfig = {
       | files.
       |
       */
-      root: Application.tmpPath('uploads'),
+      root: Application.tmpPath('nfts'),
 
       /*
       |--------------------------------------------------------------------------
