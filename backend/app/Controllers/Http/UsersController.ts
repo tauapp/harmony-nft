@@ -48,7 +48,6 @@ export default class UsersController {
             country: 'US',
             email: user.email,
             business_type: 'individual',
-            
         })
 
 
