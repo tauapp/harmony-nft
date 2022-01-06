@@ -37,7 +37,11 @@ export default class UsersController {
             return response.status(400).json({ error: 'Missing customerId' })
         }
         const user = auth.user!
-        user.customerId = customerId
+        let stripeCustomer = await this.stripe.customers.create({
+            email: user.email,
+            source: customerId,
+        })
+        user.customerId = stripeCustomer.id
         await user.save()
         return response.json(user)
     }
