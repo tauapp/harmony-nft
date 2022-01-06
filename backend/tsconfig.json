@@ -30,7 +30,6 @@
       "@adonisjs/repl",
       "@adonisjs/lucid",
       "@adonisjs/auth",
-      "@mezielabs/adonis-stripe"
     ]
   }
 }
