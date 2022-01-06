@@ -29,9 +29,7 @@ export default class UsersController {
         return response.json(token)
     }
     
-    public async link ({ request, response, auth }: HttpContextContract) {
-        //TODO: Turn Stripe ID into customer ID
-        
+    public async link ({ request, response, auth }: HttpContextContract) {        
         const source = request.body().customerId
         if(!source) {
             return response.status(400).json({ error: 'Missing customerId' })

@@ -32,20 +32,19 @@ export default class NftsController {
             return response.status(404).json({ error: 'NFT not found' })
         }
         if (nft.forSale) {
-            //TODO: Give us 15% commision
             nft.forSale = false
             await nft.load('owner')
-            this.stripe.charges.create({
+            await this.stripe.charges.create({
                 amount: nft.price,
                 currency: 'usd',
                 customer: user.customerId,
                 description: `${nft.owner.name} bought ${nft.name}`,
             })
             //Payout NFT price to owner
-            this.stripe.transfers.create({
+            await this.stripe.transfers.create({
                 amount: nft.price * 0.85,
                 currency: 'usd',
-                destination: nft.owner.customerId, //TODO: CREATE STRIPE ACCOUNT
+                destination: nft.owner.customerId,
                 description: `${user.name} sold ${nft.name}`,
             })
             nft.ownerId = user.id
