@@ -32,26 +32,24 @@ export default class UsersController {
     public async link ({ request, response, auth }: HttpContextContract) {
         //TODO: Turn Stripe ID into customer ID
         
-        const { customerId } = request.body()
-        if(!customerId) {
+        const source = request.body().customerId
+        if(!source) {
             return response.status(400).json({ error: 'Missing customerId' })
         }
         const user = auth.user!
         let stripeCustomer = await this.stripe.customers.create({
             email: user.email,
-            source: customerId,
+            source: source,
         })
 
         //Create a stripe account linked to the customer ID
-        this.stripe.accounts.create({
-            type: 'custom',
-            country: 'US',
-            email: user.email,
-            business_type: 'individual',
-        })
+        let bankaccount = await this.stripe.customers.createSource(
+            stripeCustomer.id,
+            { source } 
+        )
 
 
-        user.customerId = stripeCustomer.id
+        user.customerId = bankaccount.id
         await user.save()
         return response.json(user)
     }
