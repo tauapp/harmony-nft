@@ -13,7 +13,10 @@ export interface Nft {
   forSale: boolean,
   price?: number,
   location: string,
-  owner: number
+  owner: {
+    name: string,
+    email: string
+  }
 }
 
 @Injectable({
@@ -22,37 +25,7 @@ export interface Nft {
 export class NftService {
 
   constructor(private auth: AuthService, private router: Router) { }
-
-  //REPLACED BY API
-  private nfts: Nft[] = [
-    {
-      id: 0,
-      name: "Green Square",
-      description: "A vintage green square painted by the infamous 12th-century painter Deonardo LaVinci.",
-      forSale: true,
-      price: 10_000,
-      location: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Green_square.svg/1200px-Green_square.svg.png",
-      owner: 1
-    },
-    {
-      id: 1,
-      name: "Red Square",
-      description: "A red square symbolizing the indisputable soupiness of cereal.",
-      forSale: false,
-      price: 10_000,
-      location: "https://www.americasfinestlabels.com/includes/work/image_cache/4b4f4b63cc837b5f01ce2d718b0f9be2.thumb.jpg",
-      owner: 0
-    },
-    {
-      id: 2,
-      name: "Rico Astlé",
-      description: "A mysterious man who shows up seemingly every time you click a link your friend sent you.",
-      forSale: true,
-      price: 100,
-      location: "https://variety.com/wp-content/uploads/2021/07/Rick-Astley-Never-Gonna-Give-You-Up.png?w=1024",
-      owner: 1
-    }
-  ]
+  
 
   //Return all nfts which are for sale and not owned by the current user
   async listNftsForSale() {

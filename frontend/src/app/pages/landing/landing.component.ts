@@ -13,8 +13,8 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login() {
-    this.auth.loginWithGoogle();
+  async login() {
+    await this.auth.loginWithGoogle();
   }
 
 }

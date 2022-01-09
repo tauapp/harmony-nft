@@ -20,9 +20,12 @@ export class PaymentComponent implements OnInit {
     private storage: StorageService,
     private nft: NftService
   ) { 
-    if(auth.isLinked()) {
-      router.navigate(['/home'])
-    }
+    auth.isLinked()
+    .then(isLinked => {
+      if(isLinked) {
+        router.navigate(['/home'])
+      }
+    })
   }
 
   stripe: Stripe | null = null;
@@ -55,33 +58,32 @@ export class PaymentComponent implements OnInit {
 
   cardError?: string;
 
-  link() {
+  async link() {
     if (this.card) {
-      this.stripe?.createToken(this.card).then(result => {
+      let result = await this.stripe?.createToken(this.card)!
         if(result.error) {
           this.snackbar.open(result.error.message!, "OK", {duration: 2000})
         }
         else {
           let token = result.token
-          this.auth.link(token.id)
+          await this.auth.link(token.id)
           //If there is an NFT to buy, then buy it
           if(this.storage.nftToBuy) {
-            this.nft.buyNft(this.storage.nftToBuy.id).match({
+            (await this.nft.buyNft(this.storage.nftToBuy.id)).match({
               Success: () => this.router.navigate(['/home']),
               Error: (error) => this.snackbar.open(error, "OK", {duration: 2000})
             })
             
           } else if (this.storage.nftToSell) {
-            this.nft.putNftForSale(this.storage.nftToSell.id, this.storage.priceToSell!).match({
+            (await this.nft.putNftForSale(this.storage.nftToSell.id, this.storage.priceToSell!)).match({
               Success: () => this.router.navigate(['/home']),
-              Error: (error) => this.snackbar.open(error, "OK", {duration: 2000})
+              Error: (error: string) => this.snackbar.open(error, "OK", {duration: 2000})
             })
           }
           else {
             this.router.navigate(['/home'])
           }
         }
-      })
     }
   }
 }

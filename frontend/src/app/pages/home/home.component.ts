@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/nft', nft.id])
   }
 
-  ngOnInit(): void {
-    this.nfts = this.nftService.listUserNfts().match({
+  async ngOnInit() {
+    this.nfts = (await this.nftService.listUserNfts()).match({
       Success: (nfts) => nfts,
       Error: (err) => {
         this.snackBar.open(err, "Dismiss", {

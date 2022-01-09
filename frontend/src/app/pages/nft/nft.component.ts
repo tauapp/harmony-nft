@@ -29,7 +29,10 @@ export class NftComponent implements OnInit {
     id: 0,
     name: "",
     description: "",
-    owner: 0,
+    owner: {
+      name: "",
+      email: ""
+    },
     price: 0,
     forSale: false,
     location: ""
@@ -37,17 +40,17 @@ export class NftComponent implements OnInit {
 
   isOwner: boolean = false
 
-  ngOnInit(): void {
+  async ngOnInit() {
     let id  = this.activatedRoute.snapshot.paramMap.get("id")
     if(!id) {
       //Navigate back
       this.router.navigate(['/home'])
     } else {
       this.nftId = parseInt(id)
-      this.nft = this.nftService.getNft(this.nftId)
+      this.nft = await this.nftService.getNft(this.nftId)
       //Check if the user is the owner of the nft
       if(this.authService.currentUser.value) {
-        this.isOwner = this.authService.currentUser.value.id == this.nft.owner
+        this.isOwner = this.authService.currentUser.value.email == this.nft.owner.email
       }
     }
   }
@@ -70,7 +73,7 @@ export class NftComponent implements OnInit {
     })
   }
 
-  putUpForSale() {
+  async putUpForSale() {
 
     this.storage.nftToSell = this.nft
 
@@ -84,14 +87,14 @@ export class NftComponent implements OnInit {
     confirm.afterClosed().subscribe(result => {
       if(result != 0) {
         this.storage.priceToSell = parseFloat(result)
-        this.nftService.putNftForSale(this.nftId, result)
+        await this.nftService.putNftForSale(this.nftId, result)
       }
       this.storage.nftToSell = undefined
       this.storage.priceToSell = undefined
     })
   }
 
-  buyNft() {
+  async buyNft() {
     this.storage.nftToBuy = this.nft
 
 
@@ -104,7 +107,7 @@ export class NftComponent implements OnInit {
 
     confirm.afterClosed().subscribe(result => {
       if(result) {
-        this.nftService.buyNft(this.nftId)
+        await this.nftService.buyNft(this.nftId)
       }
       this.storage.nftToBuy = undefined
     })
