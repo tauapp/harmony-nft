@@ -15,9 +15,21 @@
 
 import Logger from '@ioc:Adonis/Core/Logger'
 import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
+import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Youch from 'youch'
+import forTerminal from 'youch-terminal'
+
 
 export default class ExceptionHandler extends HttpExceptionHandler {
   constructor () {
     super(Logger)
+  }
+
+  public async handle(error: any, ctx: HttpContextContract) {
+    new Youch(error, ctx)
+    .toJSON()
+    .then(out => console.log(forTerminal(out)))
+
+    return super.handle(error, ctx)
   }
 }
