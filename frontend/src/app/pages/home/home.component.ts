@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
+
   nfts: Nft[] = []
+  public nftsForSale: Nft[] = []
 
   //When an nft is clicked, it navigates to its page
   onNftClick(nft: Nft) {
@@ -25,6 +27,9 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
+
+    this.nftsForSale = await this.nftService.listNftsForSale()
+
     this.nfts = (await this.nftService.listUserNfts()).match({
       Success: (nfts) => nfts,
       Error: (err) => {

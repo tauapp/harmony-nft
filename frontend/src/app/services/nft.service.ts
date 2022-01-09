@@ -12,7 +12,6 @@ export interface Nft {
   description: string,
   forSale: boolean,
   price?: number,
-  location: string,
   owner: {
     name: string,
     email: string
@@ -101,7 +100,11 @@ export class NftService {
   }
 
   //Returns the location of an NFT by id
-  getNftLocation(id: number) {
-    return environment.server + "/nfts/cdn/" + id
+  async getNftLocation(id: number) {
+    let url = environment.server + "/nfts/cdn/" + id
+    //Fetch blob from CDN
+    let blob = (await axios.get(url)).data
+    let urlCreator = window.URL || window.webkitURL
+    return urlCreator.createObjectURL(blob)
   }
 }

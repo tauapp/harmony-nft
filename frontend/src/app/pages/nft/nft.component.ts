@@ -34,8 +34,7 @@ export class NftComponent implements OnInit {
       email: ""
     },
     price: 0,
-    forSale: false,
-    location: ""
+    forSale: false
   }
 
   isOwner: boolean = false
@@ -60,10 +59,8 @@ export class NftComponent implements OnInit {
     if(!this.isOwner) {
       return
     }
-    fetch(this.nftService.getNftLocation(this.nftId))
-    .then(res => res.blob())
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
+    this.nftService.getNftLocation(this.nftId)
+    .then(url => {
       const a = document.createElement('a');
       a.href = url;
       a.download = this.nft.name + ".jpeg";
@@ -84,7 +81,7 @@ export class NftComponent implements OnInit {
       restoreFocus: false
     })
 
-    confirm.afterClosed().subscribe(result => {
+    confirm.afterClosed().subscribe(async result => {
       if(result != 0) {
         this.storage.priceToSell = parseFloat(result)
         await this.nftService.putNftForSale(this.nftId, result)
@@ -105,7 +102,7 @@ export class NftComponent implements OnInit {
       restoreFocus: false
     })
 
-    confirm.afterClosed().subscribe(result => {
+    confirm.afterClosed().subscribe(async result => {
       if(result) {
         await this.nftService.buyNft(this.nftId)
       }
