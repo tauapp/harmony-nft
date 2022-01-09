@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import axios from 'axios';
 import { Result } from 'src/contracts/result';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
 
@@ -53,55 +55,68 @@ export class NftService {
   ]
 
   //Return all nfts which are for sale and not owned by the current user
-  listNftsForSale(/*page: number*/) {
-    return this.nfts.filter(nft => nft.forSale && nft.owner != this.auth.currentUser.value!.id)
+  async listNftsForSale() {
+    return (await axios.get(environment.server + "/nfts/all",
+    {
+      headers: {
+        Authorization: "Bearer " + this.auth.currentUser.value!.token.token
+      }
+    })).data
   }
 
-  getNft(id: number) {
-    return this.nfts[id]
+  async getNft(id: number) {
+    return (await axios.get(environment.server + "/nfts/" + id)).data
   }
 
-  buyNft(id: number) {
-    if(!this.auth.isLinked()) {
+  async buyNft(id: number) {
+    if(!await this.auth.isLinked()) {
       //Redirect to link page
       this.router.navigate(['/link'])
     }
     if(this.auth.currentUser != null) {
-      if(this.nfts[id].forSale) {
-        this.nfts[id].forSale = false
-        this.nfts[id].owner = this.auth.currentUser.value!.id
-        return Result.Success(null)
-      } else {
-        return Result.Error("NFT is not for sale.")
-      }
+      //Use the API in backend to buy the NFT
+      axios.post(environment.server + "/nfts/buy/" + id,
+      {
+        headers: {
+          Authorization: "Bearer " + this.auth.currentUser.value!.token.token
+        }
+      })
+      return Result.Success(null)
     } else {
       return Result.Error("You must be logged in to buy an NFT.")
     }
   }
 
   //Puts an NFT up for sale
-  putNftForSale(id: number, price: number) {
-    if(!this.auth.isLinked()) {
+  async putNftForSale(id: number, price: number) {
+    if(!await this.auth.isLinked()) {
       //Redirect to link page
       this.router.navigate(['/link'])
     }
     if(this.auth.currentUser != null) {
-      if(this.nfts[id].owner == this.auth.currentUser.value!.id) {
-        this.nfts[id].forSale = true
-        this.nfts[id].price = price
-        return Result.Success(null)
-      } else {
-        return Result.Error("You are not the owner of this NFT.")
-      }
+      //Use the API in backend to put the NFT up for sale
+      axios.post(environment.server + "/nfts/sell/" + id,
+      {
+        headers: {
+          Authorization: "Bearer " + this.auth.currentUser.value!.token.token
+        }
+      })
+      return Result.Success(null)
     } else {
       return Result.Error("You must be logged in to put an NFT up for sale.")
     }
   }
 
   //Lists a user's owned NFTS
-  listUserNfts() {
+  async listUserNfts() {
     if(this.auth.currentUser != null) {
-      let myNfts = this.nfts.filter(nft => nft.owner == this.auth.currentUser.value!.id)
+      //Get user's owned nfts from the API from endpoint /auth/nfts
+      let myNfts: Nft[] = (await axios.get(environment.server + "/auth/nfts",
+      {
+        headers: {
+          Authorization: "Bearer " + this.auth.currentUser.value!.token.token
+        }
+      })).data
       if(myNfts.length > 0) {
         return Result.Success(myNfts)
       } else {
@@ -114,6 +129,6 @@ export class NftService {
 
   //Returns the location of an NFT by id
   getNftLocation(id: number) {
-    return this.nfts[id].location
+    return environment.server + "/nfts/cdn/" + id
   }
 }

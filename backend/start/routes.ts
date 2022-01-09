@@ -39,7 +39,7 @@ Route.group(() => {
 }).prefix('auth')
 
 Route.group(() => {
-  Route.get("/all", "NftsController.get")
+  Route.get("/all", "NftsController.all")
   Route.get("/:id", "NftsController.get")
   Route.post("/buy/:id", "NftsController.buy")
   Route.post("/sell/:id", "NftsController.sell")

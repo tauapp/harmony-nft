@@ -14,8 +14,11 @@ export default class NftsController {
     )
 
     //List all NFTs for Sale
-    public async all({ response }: HttpContextContract) {
-        const nfts = await Nft.query().where('forSale', true)
+    public async all({ response, auth }: HttpContextContract) {
+        const user = auth.user!
+        const nfts = await Nft.query()
+        .where('forSale', true)
+        .whereNot('ownerId', user.id)
         return response.json(nfts)
     }
 

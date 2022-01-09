@@ -34,17 +34,26 @@ export default class UsersController {
         if(!source) {
             return response.status(400).json({ error: 'Missing customerId' })
         }
-        const user = auth.user!
-        let stripeCustomer = await this.stripe.customers.create({
-            email: user.email,
-            source: source,
-        })
 
-        //Create a stripe account linked to the customer ID
-        let bankaccount = await this.stripe.customers.createSource(
-            stripeCustomer.id,
-            { source } 
-        )
+        let stripeCustomer, bankaccount
+
+        const user = auth.user!
+
+        try {
+            stripeCustomer = await this.stripe.customers.create({
+                email: user.email,
+                source: source,
+            })
+    
+            //Create a stripe account linked to the customer ID
+            bankaccount = await this.stripe.customers.createSource(
+                stripeCustomer.id,
+                { source } 
+            )
+        } catch(err) {
+            return response.status(400).json({ error: "Invalid Payment Method." })
+        }
+
 
 
         user.customerId = bankaccount.id
