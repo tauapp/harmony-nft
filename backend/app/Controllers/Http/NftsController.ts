@@ -46,7 +46,7 @@ export default class NftsController {
             })
             .then(() => {
                 return this.stripe.transfers.create({
-                    amount: nft.price * 0.90,
+                    amount: nft.price,
                     currency: 'usd',
                     destination: nft.owner.customerId,
                     description: `${user.name} sold the NFT named ${nft.name}`,
@@ -79,7 +79,7 @@ export default class NftsController {
         await nft.save()
         //Predeposit
         await this.stripe.charges.create({
-            amount: nft.price * 0.05,
+            amount: nft.price * 0.15,
             currency: 'usd',
             customer: user.customerId,
             description: `${nft.owner.name} paid a predeposit to secure their sale.`,
