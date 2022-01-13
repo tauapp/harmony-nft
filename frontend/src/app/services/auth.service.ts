@@ -44,7 +44,8 @@ export class AuthService {
       email: user.email,
       name: user.name,
       token: user.id
-    }) as AxiosResponse<OatToken>
+    },
+    ) as AxiosResponse<OatToken>
     this.currentUser.next({
       username: user.name,
       email: user.email,

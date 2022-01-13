@@ -1,1 +1,1 @@
-sudo --preserve-env gpg --output .env --decrypt .env.gpg
+sudo --preserve-env gpg --output .env --decrypt --pinentry-mode=loopback .env.gpg

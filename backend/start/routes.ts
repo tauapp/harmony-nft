@@ -32,16 +32,16 @@ Route.get('/health', async ({ response }) => {
 })
 
 Route.group(() => {
-  Route.post("/login", "UsersController.login")
-  Route.post("/link", "UsersController.link").middleware('auth')
-  Route.post("/islinked", "UsersController.isLinked").middleware('auth')
-  Route.get("/nfts", "UsersController.getNfts").middleware('auth')
-}).prefix('auth')
+  Route.post("login", "UsersController.login")
+  Route.post("link", "UsersController.link").middleware('auth')
+  Route.post("islinked", "UsersController.isLinked").middleware('auth')
+  Route.get("nfts", "UsersController.getNfts").middleware('auth')
+}).prefix('/auth')
 
 Route.group(() => {
-  Route.get("/all", "NftsController.all")
-  Route.get("/:id", "NftsController.get")
-  Route.post("/buy/:id", "NftsController.buy")
-  Route.post("/sell/:id", "NftsController.sell")
-  Route.post("/cdn/:id", "NtfsController.cdn")
-}).prefix('nft').middleware('auth')
+  Route.get("all", "NftsController.all")
+  Route.get(":id", "NftsController.get")
+  Route.post("buy/:id", "NftsController.buy")
+  Route.post("sell/:id", "NftsController.sell")
+  Route.post("cdn/:id", "NtfsController.cdn")
+}).prefix('/nft').middleware('auth')
