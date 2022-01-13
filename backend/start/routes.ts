@@ -44,4 +44,4 @@ Route.group(() => {
   Route.post("buy/:id", "NftsController.buy")
   Route.post("sell/:id", "NftsController.sell")
   Route.post("cdn/:id", "NtfsController.cdn")
-}).prefix('/nft').middleware('auth')
+}).prefix('/nfts').middleware('auth')

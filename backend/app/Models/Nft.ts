@@ -22,10 +22,10 @@ export default class Nft extends BaseModel {
   public location: string
 
   @column()
-  public ownerId: number
+  public userId: number
 
   @hasOne(() => User)
-  public owner: HasOne<typeof User>
+  public user: HasOne<typeof User>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

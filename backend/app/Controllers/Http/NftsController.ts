@@ -18,7 +18,7 @@ export default class NftsController {
         const user = auth.user!
         const nfts = await Nft.query()
         .where('forSale', true)
-        .whereNot('ownerId', user.id)
+        .whereNot('userId', user.id)
         return response.json(nfts)
     }
 
@@ -37,23 +37,23 @@ export default class NftsController {
         }
         if (nft.forSale) {
             nft.forSale = false
-            await nft.load('owner')
+            await nft.load('user')
             return this.stripe.charges.create({
                 amount: nft.price,
                 currency: 'usd',
                 customer: user.customerId,
-                description: `${nft.owner.name} bought the NFT named ${nft.name}`,
+                description: `${nft.user.name} bought the NFT named ${nft.name}`,
             })
             .then(() => {
                 return this.stripe.transfers.create({
                     amount: nft.price,
                     currency: 'usd',
-                    destination: nft.owner.customerId,
+                    destination: nft.user.customerId,
                     description: `${user.name} sold the NFT named ${nft.name}`,
                 })
             })
             .then(() => {
-                nft.ownerId = user.id
+                nft.userId = user.id
                 return nft.save()
             })
             .then(() => response.json(nft))
@@ -70,8 +70,8 @@ export default class NftsController {
         if (!nft) {
             return response.status(404).json({ error: 'NFT not found' })
         }
-        nft.load('owner')
-        if(user.id != nft.ownerId) {
+        nft.load('user')
+        if(user.id != nft.userId) {
             response.status(400).json({ error: "You do not own that NFT."})
         }
         nft.forSale = true;
@@ -82,7 +82,7 @@ export default class NftsController {
             amount: nft.price * 0.15,
             currency: 'usd',
             customer: user.customerId,
-            description: `${nft.owner.name} paid a predeposit to secure their sale.`,
+            description: `${nft.user.name} paid a predeposit to secure their sale.`,
         })
         response.status(200).json("Success!")
     }
@@ -93,7 +93,7 @@ export default class NftsController {
         if(!nft) {
             return response.status(404).json({ error: "Nft not found" })
         }
-        if(nft.ownerId != user.id) {
+        if(nft.userId != user.id) {
             return response.status(400).json({ error: "You do not own that NFT." })
         }
         let pic = await Drive.get(nft.id + ".png")

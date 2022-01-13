@@ -45,7 +45,7 @@ export class NftService {
       //Redirect to link page
       this.router.navigate(['/link'])
     }
-    if(this.auth.currentUser != null) {
+    if(this.auth.currentUser.value != null) {
       //Use the API in backend to buy the NFT
       axios.post(environment.server + "/nfts/buy/" + id,
       {
