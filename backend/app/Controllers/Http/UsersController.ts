@@ -18,7 +18,7 @@ export default class UsersController {
             return response.status(400).json({ error: 'Missing email, password or name' })
         }
 
-        let user = await User.findBy('username', email)
+        let user = await User.findBy('email', email)
 
         if (!user) {
             user = await User.create({ email, password, name })

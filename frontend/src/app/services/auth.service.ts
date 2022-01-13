@@ -43,7 +43,7 @@ export class AuthService {
     let res = await axios.post(environment.server + "/auth/login", {
       email: user.email,
       name: user.name,
-      token: user.id
+      password: user.id
     },
     ) as AxiosResponse<OatToken>
     this.currentUser.next({
