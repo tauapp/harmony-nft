@@ -1,0 +1,113 @@
+[ info ]  building project...
+[ info ]  starting http server...
+[1642385770819] [32mINFO[39m (backend/6168 on tauapp-harmonynft-hts4mc4npmk): [36mstarted server on 0.0.0.0:3333[39m
+[ info ]  watching file system for changes
+╭─────────────────────────────────────────────────╮
+│                                                 │
+│    Server address: http://127.0.0.1:3333        │
+│    Watching filesystem for changes: YES         │
+│                                                 │
+╰─────────────────────────────────────────────────╯
+'select * from `api_tokens` where `id` = ? and `type` = ? limit ? 1,api,1'
+'select * from `users` where `id` = ? limit ? 1,1'
+'select * from `nfts` where `for_sale` = ? and not `user_id` = ? true,1'
+'select * from `api_tokens` where `id` = ? and `type` = ? limit ? 1,api,1'
+'select * from `users` where `id` = ? limit ? 1,1'
+'select * from `api_tokens` where `id` = ? and `type` = ? limit ? 1,api,1'
+'select * from `users` where `id` = ? limit ? 1,1'
+[1642385779793] [31mERROR[39m (backend/6168 on tauapp-harmonynft-hts4mc4npmk): [36mCannot find module '/workspace/harmony-nft/backend/app/Controllers/Http/NtfsController'
+Require stack:
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/application/build/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/ioc-transformer.js
+- /workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/src/esmRequire.js
+- /workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/src/Compiler/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/register.js
+- internal/preload[39m
+    err: {
+      "type": "Error",
+      "message": "Cannot find module '/workspace/harmony-nft/backend/app/Controllers/Http/NtfsController'\nRequire stack:\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/index.js\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/application/build/index.js\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/ioc-transformer.js\n- /workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/src/esmRequire.js\n- /workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/index.js\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/src/Compiler/index.js\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/index.js\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/index.js\n- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/register.js\n- internal/preload",
+      "stack":
+          Error: Cannot find module '/workspace/harmony-nft/backend/app/Controllers/Http/NtfsController'
+          Require stack:
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/index.js
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/application/build/index.js
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/ioc-transformer.js
+          - /workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/src/esmRequire.js
+          - /workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/index.js
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/src/Compiler/index.js
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/index.js
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/index.js
+          - /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/register.js
+          - internal/preload
+              at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)
+              at Function.Module._load (node:internal/modules/cjs/loader:778:27)
+              at Module.require (node:internal/modules/cjs/loader:1005:19)
+              at require (node:internal/modules/cjs/helpers:102:18)
+              at ImportAliases.resolve (/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js:95:23)
+              at ImportAliases.resolveAsync (/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js:113:25)
+              at Ioc.import (/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js:280:42)
+              at Ioc.makeAsync (/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js:391:40)
+              at IocResolver.call (/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Resolver/index.js:90:62)
+              at Object.PreCompiler.runRouteHandler [as fn] (/workspace/harmony-nft/backend/node_modules/@adonisjs/http-server/build/src/Server/PreCompiler/index.js:47:51)
+      "code": "MODULE_NOT_FOUND",
+      "requireStack": [
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js",
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js",
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/index.js",
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/application/build/index.js",
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/ioc-transformer.js",
+        "/workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/src/esmRequire.js",
+        "/workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/index.js",
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/src/Compiler/index.js",
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/index.js",
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/index.js",
+        "/workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/register.js",
+        "internal/preload"
+      ],
+      "status": 500
+    }
+
+[41m[37m Error 
+[39m[49m
+ Cannot find module '/workspace/harmony-nft/backend/app/Controllers/Http/NtfsController'
+Require stack:
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/application/build/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/ioc-transformer.js
+- /workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/src/esmRequire.js
+- /workspace/harmony-nft/backend/node_modules/@poppinss/utils/build/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/src/Compiler/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/require-ts/build/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/src/requireHook/index.js
+- /workspace/harmony-nft/backend/node_modules/@adonisjs/assembler/build/register.js
+- internal/preload 
+
+
+   [2m1[22m  [33mImportAliases.resolve[39m
+      [32m/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js[39m:[32m95[39m
+
+   [2m2[22m  [33mImportAliases.resolveAsync[39m
+      [32m/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/ImportAliases.js[39m:[32m113[39m
+
+   [2m3[22m  [33mIoc.import[39m
+      [32m/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js[39m:[32m280[39m
+
+   [2m4[22m  [33mIoc.makeAsync[39m
+      [32m/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Ioc/index.js[39m:[32m391[39m
+
+   [2m5[22m  [33mIocResolver.call[39m
+      [32m/workspace/harmony-nft/backend/node_modules/@adonisjs/fold/build/src/Resolver/index.js[39m:[32m90[39m
+
+   [2m6[22m  [33mObject.PreCompiler.runRouteHandler [as fn][39m
+      [32m/workspace/harmony-nft/backend/node_modules/@adonisjs/http-server/build/src/Server/PreCompiler/index.js[39m:[32m47[39m
+

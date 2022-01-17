@@ -3,7 +3,6 @@ import Nft from 'App/Models/Nft'
 import Stripe from 'stripe'
 import Env from '@ioc:Adonis/Core/Env'
 import Drive from '@ioc:Adonis/Core/Drive'
-
 export default class NftsController {
 
     stripe = new Stripe(
