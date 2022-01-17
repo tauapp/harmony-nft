@@ -43,5 +43,5 @@ Route.group(() => {
   Route.get(":id", "NftsController.get")
   Route.post("buy/:id", "NftsController.buy")
   Route.post("sell/:id", "NftsController.sell")
-  Route.post("cdn/:id", "NtfsController.cdn")
+  Route.get("cdn/:id", "NtfsController.cdn")
 }).prefix('/nfts').middleware('auth')

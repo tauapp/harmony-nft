@@ -3,7 +3,7 @@
     <!--Shows the NFT image in a material card next to the title and description-->
     <mat-card id="nft-image-container">
         <ng-container *ngIf="isOwner">
-            <img [src]="nftService.getNftLocation(nft.id)" width = "200px"> 
+            <img [src]="nft.location" width = "200px"> 
         </ng-container>
         <ng-container *ngIf="!isOwner">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png" width = "200px">

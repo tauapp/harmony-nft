@@ -12,7 +12,7 @@
                         </mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        <img height="100px" src="{{nftService.getNftLocation(nft.id) | async}}" alt="{{nft.name}}">
+                        <img height="100px" src="{{nft.location}}" alt="{{nft.name}}">
                         <br>
                         <p>{{nft.description}}</p>
                         <p *ngIf="nft.forSale" class="forsale">On The Market for ${{nft.price}}</p>

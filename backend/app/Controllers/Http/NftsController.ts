@@ -25,7 +25,11 @@ export default class NftsController {
     //Get NFT by ID
     public async get({ params, response }: HttpContextContract) {
         const nft = await Nft.find(params.id)
-        return response.json(nft)
+        if (!nft) {
+            return response.status(404).json({ error: 'NFT not found' })
+        }
+        await nft.load('user')
+        return response.json(nft.serialize())
     }
 
     //Buy an NFT

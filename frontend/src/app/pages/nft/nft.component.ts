@@ -29,7 +29,7 @@ export class NftComponent implements OnInit {
     id: 0,
     name: "",
     description: "",
-    owner: {
+    user: {
       name: "",
       email: ""
     },
@@ -49,7 +49,7 @@ export class NftComponent implements OnInit {
       this.nft = await this.nftService.getNft(this.nftId)
       //Check if the user is the owner of the nft
       if(this.authService.currentUser.value) {
-        this.isOwner = this.authService.currentUser.value.email == this.nft.owner.email
+        this.isOwner = this.authService.currentUser.value.email == this.nft.user.email
       }
     }
   }

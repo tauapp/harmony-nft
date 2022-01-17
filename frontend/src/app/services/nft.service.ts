@@ -12,7 +12,8 @@ export interface Nft {
   description: string,
   forSale: boolean,
   price?: number,
-  owner: {
+  location?: string,
+  user: {
     name: string,
     email: string
   }
@@ -37,7 +38,15 @@ export class NftService {
   }
 
   async getNft(id: number) {
-    return (await axios.get(environment.server + "/nfts/" + id)).data
+    let nft = (await axios.get(environment.server + "/nfts/" + id, {
+      headers:
+      {
+        Authorization: "Bearer " + this.auth.currentUser.value!.token.token
+      }
+    })).data as Nft
+
+    nft.location = await this.getNftLocation(nft.id)
+    return nft
   }
 
   async buyNft(id: number) {
@@ -90,6 +99,9 @@ export class NftService {
         }
       })).data
       if(myNfts.length > 0) {
+        for(let n of myNfts) {
+          n.location = await this.getNftLocation(n.id)
+        }
         return Result.Success(myNfts)
       } else {
         return Result.Error("You do not own any NFTs yet.")
@@ -103,7 +115,9 @@ export class NftService {
   async getNftLocation(id: number) {
     let url = environment.server + "/nfts/cdn/" + id
     //Fetch blob from CDN
-    let blob = (await axios.get(url)).data
+    let blob = (await axios.get(url, {headers: {
+      Authorization: "Bearer " + this.auth.currentUser.value!.token.token
+    }})).data
     let urlCreator = window.URL || window.webkitURL
     return urlCreator.createObjectURL(blob)
   }

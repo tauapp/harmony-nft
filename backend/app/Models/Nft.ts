@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 
 export default class Nft extends BaseModel {
@@ -24,8 +24,8 @@ export default class Nft extends BaseModel {
   @column()
   public userId: number
 
-  @hasOne(() => User)
-  public user: HasOne<typeof User>
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
