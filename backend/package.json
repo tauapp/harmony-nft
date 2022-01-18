@@ -20,6 +20,7 @@
     "@adonisjs/core": "^5.4.0",
     "@adonisjs/lucid": "^16.3.2",
     "@adonisjs/repl": "^3.1.0",
+    "@types/node": "^17.0.9",
     "@types/stripe": "^8.0.417",
     "adonis-sail": "^0.0.4",
     "luxon": "^2.3.0",

@@ -10,7 +10,6 @@ export default class Nfts extends BaseSchema {
       table.string('description', 1024).notNullable()
       table.boolean('for_sale').notNullable()
       table.float('price').notNullable()
-      table.string('location',1024).notNullable()
       table.integer('user_id').unsigned().notNullable()
       table
         .foreign('user_id')

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Result } from 'src/contracts/result';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
+import { Buffer } from 'buffer/';
 
 
 export interface Nft {
@@ -100,7 +101,7 @@ export class NftService {
       })).data
       if(myNfts.length > 0) {
         for(let n of myNfts) {
-          n.location = await this.getNftLocation(n.id)
+          n.location = this.getNftLocation(n.id)
         }
         return Result.Success(myNfts)
       } else {
@@ -112,13 +113,7 @@ export class NftService {
   }
 
   //Returns the location of an NFT by id
-  async getNftLocation(id: number) {
-    let url = environment.server + "/nfts/cdn/" + id
-    //Fetch blob from CDN
-    let blob = (await axios.get(url, {headers: {
-      Authorization: "Bearer " + this.auth.currentUser.value!.token.token
-    }})).data
-    let urlCreator = window.URL || window.webkitURL
-    return urlCreator.createObjectURL(blob)
+  getNftLocation(id: number) {
+    return environment.server + "/nfts/cdn/" + id
   }
 }

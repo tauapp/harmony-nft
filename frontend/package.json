@@ -28,6 +28,7 @@
     "@stripe/stripe-js": "^1.22.0",
     "angularx-social-login": "^4.0.1",
     "axios": "^0.24.0",
+    "buffer": "^6.0.3",
     "ngx-cookie-service": "^13.1.2",
     "rxjs": "~7.4.0",
     "safety-match": "^0.4.4",

@@ -8,7 +8,6 @@ export const NftFactory = Factory
       description: faker.lorem.paragraph(),
       forSale: false,
       price: 100,
-      location: "/cdn/1",
       userId: 1
     }
   })
