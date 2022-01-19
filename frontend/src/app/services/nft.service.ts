@@ -46,7 +46,7 @@ export class NftService {
       }
     })).data as Nft
 
-    nft.location = await this.getNftLocation(nft.id)
+    nft.location = this.getNftLocation(nft.id)
     return nft
   }
 
@@ -78,6 +78,9 @@ export class NftService {
     if(this.auth.currentUser != null) {
       //Use the API in backend to put the NFT up for sale
       axios.post(environment.server + "/nfts/sell/" + id,
+      {
+        price
+      },
       {
         headers: {
           Authorization: "Bearer " + this.auth.currentUser.value!.token.token
