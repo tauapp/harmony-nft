@@ -59,13 +59,20 @@ export class NftComponent implements OnInit {
     if(!this.isOwner) {
       return
     }
-    let url = this.nftService.getNftLocation(this.nftId)
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = this.nft.name + ".jpeg";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    this.nftService.getNftLocation(this.nftId).then(url => {
+      return fetch(url)
+    })
+    .then(res => res.blob())
+    .then(blob => {
+      //Make object URL from blob
+      let url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = this.nft.name + ".jpeg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    })
   }
 
   async putUpForSale() {

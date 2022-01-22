@@ -19,6 +19,9 @@ export default class Nft extends BaseModel {
   public price: number
 
   @column()
+  public imageUrl: string
+
+  @column()
   public userId: number
 
   @belongsTo(() => User)

@@ -27,6 +27,7 @@ import {GoogleLoginProvider, SocialLoginModule} from "angularx-social-login";
 import {environment} from "../environments/environment";
 import { CookieService } from 'ngx-cookie-service';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { TruncateModule } from 'ng2-truncate';
 
 
 
@@ -42,6 +43,7 @@ import { PaymentComponent } from './pages/payment/payment.component';
     PaymentComponent,
   ],
   imports: [
+    TruncateModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

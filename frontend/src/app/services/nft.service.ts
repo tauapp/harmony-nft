@@ -46,7 +46,7 @@ export class NftService {
       }
     })).data as Nft
 
-    nft.location = this.getNftLocation(nft.id)
+    nft.location = await this.getNftLocation(nft.id)
     return nft
   }
 
@@ -104,7 +104,7 @@ export class NftService {
       })).data
       if(myNfts.length > 0) {
         for(let n of myNfts) {
-          n.location = this.getNftLocation(n.id)
+          n.location = await this.getNftLocation(n.id)
         }
         return Result.Success(myNfts)
       } else {
@@ -116,7 +116,14 @@ export class NftService {
   }
 
   //Returns the location of an NFT by id
-  getNftLocation(id: number) {
-    return environment.server + "/nfts/cdn/" + id
+  async getNftLocation(id: number) {
+    //Fetch image url from CDN
+    let url = (await axios.get(environment.server + "/nfts/cdn/" + id, {
+      headers: {
+        Authorization: "Bearer " + this.auth.currentUser.value!.token.token
+      }
+    })).data as string
+
+    return url
   }
 }

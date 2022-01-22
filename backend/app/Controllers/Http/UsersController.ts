@@ -3,8 +3,7 @@ import User from 'App/Models/User'
 import Stripe from 'stripe'
 import Env from '@ioc:Adonis/Core/Env'
 import Nft from 'App/Models/Nft'
-import Drive from '@ioc:Adonis/Core/Drive'
-import { readFileSync } from 'fs'
+import send from 'send'
 
 export default class UsersController {
 
@@ -45,11 +44,12 @@ export default class UsersController {
         if (nft.forSale) {
             nft.forSale = false
             await nft.load('user')
-            return this.stripe.charges.create({
+            return this.stripe.paymentIntents.create({
                 amount: nft.price,
                 currency: 'usd',
-                customer: user.customerId,
                 description: `${nft.user.name} bought the NFT named ${nft.name}`,
+            }, {
+                stripeAccount: user.customerId
             })
             .then(() => {
                 return this.stripe.transfers.create({
@@ -85,28 +85,26 @@ export default class UsersController {
         nft.price = request.input('price')
         await nft.save()
         //Predeposit
-        await this.stripe.charges.create({
+        await this.stripe.paymentIntents.create({
             amount: nft.price * 0.15,
             currency: 'usd',
-            customer: user.customerId,
             description: `${nft.user.name} paid a predeposit to secure their sale.`,
+        }, {
+            stripeAccount: user.customerId
         })
         response.status(200).json("Success!")
     }
 
-    public async cdn({ params, response }: HttpContextContract) {
+    public async cdn({ params, response, auth }: HttpContextContract) {
         const nft = await Nft.find(params.id)
         if(!nft) {
             return response.status(404).json({ error: "Nft not found" })
         }
-        let pic: Buffer
-        try {
-            pic = await Drive.get(nft.id + ".png")
-        } catch(err) {
-            return Buffer.from('')
+        //Make sure user owns NFT
+        if(auth.user!.id !== nft.userId) {
+            return response.status(400).json({ error: "You do not own that NFT." })
         }
-        
-        return 
+        return nft!.imageUrl
     }
 
     public async login ({ request, response, auth }: HttpContextContract) {
@@ -132,28 +130,23 @@ export default class UsersController {
             return response.status(400).json({ error: 'Missing customerId' })
         }
 
-        let stripeCustomer, bankaccount
-
         const user = auth.user!
 
-        try {
-            stripeCustomer = await this.stripe.customers.create({
-                email: user.email,
-                source: source,
-            })
-    
-            //Create a stripe account linked to the customer ID
-            bankaccount = await this.stripe.customers.createSource(
-                stripeCustomer.id,
-                { source } 
-            )
-        } catch(err) {
-            return response.status(400).json({ error: "Invalid Payment Method." })
-        }
 
+        let account = await this.stripe.accounts.create({
+            type: 'custom',
+            country: 'US',
+            email: user.email,
+        })
 
-
-        user.customerId = bankaccount.id
+        await this.stripe.customers.create({
+            name: user.name,
+            email: user.email,
+            source
+        }, {
+            stripeAccount: account.id
+        })
+        user.customerId = account.id
         await user.save()
         return response.json(user)
     }

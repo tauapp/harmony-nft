@@ -35,7 +35,7 @@ Route.get('/health', async ({ response }) => {
 Route.group(() => {
   Route.post("login", "UsersController.login")
   Route.post("link", "UsersController.link").middleware('auth')
-  Route.post("islinked", "UsersController.isLinked").middleware('auth')
+  Route.post("isLinked", "UsersController.isLinked").middleware('auth')
   Route.get("nfts", "UsersController.getNfts").middleware('auth')
 }).prefix('/auth')
 
@@ -44,6 +44,6 @@ Route.group(() => {
   Route.get(":id", "UsersController.get")
   Route.post("buy/:id", "UsersController.buy")
   Route.post("sell/:id", "UsersController.sell")
+  Route.get("/cdn/:id", "UsersController.cdn")
 }).prefix('/nfts').middleware('auth')
 
-Route.get("/nfts/cdn/:id", "UsersController.cdn")

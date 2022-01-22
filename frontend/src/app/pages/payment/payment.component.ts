@@ -60,12 +60,15 @@ export class PaymentComponent implements OnInit {
 
   async link() {
     if (this.card) {
-      let result = await this.stripe?.createToken(this.card)!
+      let result = await this.stripe?.createSource(this.card, {
+        currency: 'usd',
+        type: 'card'
+      })!
         if(result.error) {
           this.snackbar.open(result.error.message!, "OK", {duration: 2000})
         }
         else {
-          let token = result.token
+          let token = result.source
           await this.auth.link(token.id)
           //If there is an NFT to buy, then buy it
           if(this.storage.nftToBuy) {

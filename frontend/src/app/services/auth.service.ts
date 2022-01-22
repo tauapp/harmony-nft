@@ -80,6 +80,7 @@ export class AuthService {
 
   async isLinked() {
     let res = await axios.post(environment.server + "/auth/isLinked",
+    {},
     {
       headers: {
         Authorization: "Bearer " + this.currentUser.value!.token.token

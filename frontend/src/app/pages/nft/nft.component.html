@@ -24,7 +24,7 @@
     <button mat-raised-button id="buy-button" *ngIf="!isOwner" (click)="buyNft()">
         Buy NFT for ${{nft.price}}
     </button>
-    <button mat-raised-button id="sell-button" *ngIf="isOwner && nft.forSale == false" (click)="putUpForSale()">
+    <button mat-raised-button id="sell-button" *ngIf="isOwner && !nft.forSale" (click)="putUpForSale()">
         Put NFT Up For Sale
     </button>
     <!--If the NFT is owned, a button to download the NFT-->
