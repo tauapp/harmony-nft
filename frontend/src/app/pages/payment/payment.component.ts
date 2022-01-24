@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { loadStripe, Stripe, StripeCardElement } from '@stripe/stripe-js';
+import { loadStripe, Stripe, StripeCardElement, StripeIbanElement } from '@stripe/stripe-js';
 import { AuthService } from 'src/app/services/auth.service';
 import { NftService } from 'src/app/services/nft.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -51,25 +51,28 @@ export class PaymentComponent implements OnInit {
     }
     this.card = stripe!.elements().create('card', {style: cardStyle})
     this.card?.mount("#stripe")
-    })
+  })
   }
 
   card?: StripeCardElement;
 
   cardError?: string;
 
+  bankAccount: string = ""
+
+  routingNumber: string = ""
+
   async link() {
     if (this.card) {
-      let result = await this.stripe?.createSource(this.card, {
-        currency: 'usd',
-        type: 'card'
+      let result = await this.stripe?.createToken(this.card, {
+        currency: 'usd'
       })!
         if(result.error) {
           this.snackbar.open(result.error.message!, "OK", {duration: 2000})
         }
         else {
-          let token = result.source
-          await this.auth.link(token.id)
+          let token = result.token
+          await this.auth.link(token.id, this.bankAccount, this.routingNumber)
           //If there is an NFT to buy, then buy it
           if(this.storage.nftToBuy) {
             (await this.nft.buyNft(this.storage.nftToBuy.id)).match({

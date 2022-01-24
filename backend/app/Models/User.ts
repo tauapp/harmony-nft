@@ -19,6 +19,9 @@ export default class User extends BaseModel {
   @column({ serializeAs: null })
   public customerId: string
 
+  @column({ serializeAs: null })
+  public connectId: string
+
   @hasMany(() => Nft)
   public nfts: HasMany<typeof Nft>
 

@@ -45,18 +45,18 @@ export default class UsersController {
             nft.forSale = false
             await nft.load('user')
             return this.stripe.paymentIntents.create({
-                amount: nft.price,
+                amount: nft.price * 100,
                 currency: 'usd',
-                description: `${nft.user.name} bought the NFT named ${nft.name}`,
-            }, {
-                stripeAccount: user.customerId
+                description: `${user.name} bought the NFT named ${nft.name}`,
+                customer: user.customerId,
+                confirm: true,
             })
             .then(() => {
                 return this.stripe.transfers.create({
-                    amount: nft.price,
+                    amount: nft.price * 100,
                     currency: 'usd',
-                    destination: nft.user.customerId,
-                    description: `${user.name} sold the NFT named ${nft.name}`,
+                    destination: nft.user.connectId,
+                    description: `${user.name} sold the NFT named ${nft.name}`
                 })
             })
             .then(() => {
@@ -81,17 +81,17 @@ export default class UsersController {
         if(user.id != nft.userId) {
             response.status(400).json({ error: "You do not own that NFT."})
         }
+        //Predeposit
+        await this.stripe.paymentIntents.create({
+            amount: nft.price * 0.15 * 100,
+            currency: 'usd',
+            description: `${user.name} paid a predeposit to secure their sale.`,
+            customer: user.customerId,
+            confirm: true,
+        })
         nft.forSale = true;
         nft.price = request.input('price')
         await nft.save()
-        //Predeposit
-        await this.stripe.paymentIntents.create({
-            amount: nft.price * 0.15,
-            currency: 'usd',
-            description: `${nft.user.name} paid a predeposit to secure their sale.`,
-        }, {
-            stripeAccount: user.customerId
-        })
         response.status(200).json("Success!")
     }
 
@@ -125,7 +125,9 @@ export default class UsersController {
     }
     
     public async link ({ request, response, auth }: HttpContextContract) {        
-        const source = request.body().customerId
+        const source: string = request.input('customerId')
+        const routing: number = request.input('routing')
+        const bank: number = request.input('account')
         if(!source) {
             return response.status(400).json({ error: 'Missing customerId' })
         }
@@ -133,10 +135,39 @@ export default class UsersController {
         const user = auth.user!
 
 
+        console.log(routing.toString().length)
+
         let account = await this.stripe.accounts.create({
             type: 'custom',
             country: 'US',
             email: user.email,
+            capabilities: {
+                card_payments: {
+                    requested: true,
+                },
+                transfers: {
+                    requested: true,
+                },
+            },
+            business_type: 'individual',
+            default_currency: 'usd',
+            individual: {
+                first_name: user.name.split(" ")[0],
+                last_name: user.name.split(" ")[user.name.length - 1],
+                email: user.email,
+                ssn_last_4: '1234',
+            },
+            tos_acceptance: {
+                date: Math.floor(Date.now() / 1000),
+                ip: request.ip(),
+            },
+            external_account: {
+                object: 'bank_account',
+                country: 'US',
+                currency: 'usd',
+                routing_number: routing.toString(),
+                account_number: bank.toString(),
+            }
         })
 
         await this.stripe.customers.create({

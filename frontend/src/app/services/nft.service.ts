@@ -71,9 +71,11 @@ export class NftService {
 
   //Puts an NFT up for sale
   async putNftForSale(id: number, price: number) {
-    if(!await this.auth.isLinked()) {
+    let islinked = await this.auth.isLinked()
+    if(!islinked) {
       //Redirect to link page
       this.router.navigate(['/link'])
+      return Result.Error("You must link your payment method to sell an NFT.")
     }
     if(this.auth.currentUser != null) {
       //Use the API in backend to put the NFT up for sale

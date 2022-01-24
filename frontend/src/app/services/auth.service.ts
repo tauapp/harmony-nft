@@ -64,10 +64,12 @@ export class AuthService {
     this.cookies.delete('user')
   }
 
-  link(id: string) {
+  link(id: string, account: string, routing: string) {
     return axios.post(environment.server + "/auth/link",
     {
-      customerId: id
+      customerId: id,
+      routing,
+      account
     },
     {
       headers: {

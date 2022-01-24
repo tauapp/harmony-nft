@@ -2,6 +2,13 @@
     <h1>Link your payment method to your account</h1>
     <mat-card class="card">
         <div id="stripe"></div>
+        <!--Bank account and routing inputs-->
+        <mat-form-field class="form-field">
+            <input matInput placeholder="Bank Account Number" [(ngModel)]="bankAccount" name="bankAccount" maxlength="17" required>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+            <input matInput placeholder="Routing Number" [(ngModel)]="routingNumber" name="routingNumber" maxlength="9" required>
+        </mat-form-field>
         <button mat-raised-button color="primary" (click)="link()">Link</button>
     </mat-card>
 </div>
