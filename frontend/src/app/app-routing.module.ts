@@ -6,12 +6,14 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { NftComponent } from './pages/nft/nft.component';
 import { NotFoundComponent } from './pages/notfound/notfound.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { TosComponent } from './pages/tos/tos.component';
 
 const routes: Routes = [
   {path: "", component: LandingComponent},
   {path: "home", component: HomeComponent, canActivate: [AuthGuard]},
   {path: "nft/:id", component: NftComponent, canActivate: [AuthGuard]},
   {path: "link", component: PaymentComponent, canActivate: [AuthGuard]},
+  {path: "tos", component: TosComponent},
   {path: "**", component: NotFoundComponent}
 ]
 

@@ -18,7 +18,9 @@
 
         <mat-divider></mat-divider>
 
-
+        <a mat-list-item routerLink="/tos" (click)="drawer.toggle(); auth.currentUser.next(null)">
+          <mat-icon matListIcon>info</mat-icon> Terms of Service
+        </a>
         <a mat-list-item routerLink="/" (click)="drawer.toggle(); auth.currentUser.next(null)">
           <mat-icon matListIcon>logout</mat-icon> Logout
         </a>

@@ -28,6 +28,7 @@ import {environment} from "../environments/environment";
 import { CookieService } from 'ngx-cookie-service';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { TruncateModule } from 'ng2-truncate';
+import { TosComponent } from './pages/tos/tos.component';
 
 
 
@@ -41,6 +42,7 @@ import { TruncateModule } from 'ng2-truncate';
     ConfirmSaleComponent,
     ConfirmBuyComponent,
     PaymentComponent,
+    TosComponent,
   ],
   imports: [
     TruncateModule,

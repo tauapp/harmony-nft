@@ -57,7 +57,7 @@ h1 {
 
 .actions {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 /*Actions flex align center on mobile*/
